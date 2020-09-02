@@ -160,10 +160,10 @@ class Yolo4(object):
         self.sess.close()
 
 if __name__ == '__main__':
-    model_path = 'JPY_weight.h5'
+    model_path = 'KRW_weight.h5'
     anchors_path = 'model_data/yolo4_anchors.txt'
-    classes_path = 'model_data/JPY_classes.txt'
-    weights_path = 'JPY/yolov4-obj_last.weights'
+    classes_path = 'model_data/KRW_classes.txt'
+    weights_path = 'KRW/yolo-obj_last.weights'
 
     score = 0.5
     iou = 0.5

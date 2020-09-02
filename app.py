@@ -16,11 +16,18 @@ def info():
     return render_template('info.html')
 
 
-@app.route('/predict', methods=['POST'])
-def predict():
+@app.route('/jpy', methods=['POST'])
+def jpy():
     if request.method == 'POST':
         img = request.get_data()
         result = count_coin.jpy_count_coin(json.loads(img)['img'])
+        return json.dumps(result)
+
+@app.route('/krw', methods=['POST'])
+def krw():
+    if request.method == 'POST':
+        img = request.get_data()
+        result = count_coin.krw_count_coin(json.loads(img)['img'])
         return json.dumps(result)
 
 if __name__ == "__main__":
