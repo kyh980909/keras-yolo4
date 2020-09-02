@@ -160,15 +160,15 @@ class Yolo4(object):
         self.sess.close()
 
 if __name__ == '__main__':
-    model_path = 'yolo4_weight.h5'
+    model_path = 'JPY_weight.h5'
     anchors_path = 'model_data/yolo4_anchors.txt'
-    classes_path = 'model_data/coco_classes.txt'
-    weights_path = 'yolov4.weights'
+    classes_path = 'model_data/JPY_classes.txt'
+    weights_path = 'JPY/yolov4-obj_last.weights'
 
     score = 0.5
     iou = 0.5
 
-    model_image_size = (608, 608)
+    model_image_size = (416, 416)
 
     yolo4_model = Yolo4(score, iou, anchors_path, classes_path, model_path, weights_path)
 

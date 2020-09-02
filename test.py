@@ -15,7 +15,6 @@ import cv2
 
 from decode_np import Decode
 
-print(test)
 def get_class(classes_path):
     classes_path = os.path.expanduser(classes_path)
     with open(classes_path) as f:
@@ -33,9 +32,9 @@ def get_anchors(anchors_path):
 if __name__ == '__main__':
     print('Please visit https://github.com/miemie2013/Keras-YOLOv4 for more complete model!')
 
-    model_path = 'ep073-loss11.905.h5'
+    model_path = 'JPY_weight.h5'
     anchors_path = 'model_data/yolo4_anchors.txt'
-    classes_path = 'model_data/voc_classes.txt'
+    classes_path = 'model_data/JPY_classes.txt'
 
     class_names = get_class(classes_path)
     anchors = get_anchors(anchors_path)
@@ -43,7 +42,7 @@ if __name__ == '__main__':
     num_anchors = len(anchors)
     num_classes = len(class_names)
 
-    model_image_size = (608, 608)
+    model_image_size = (416, 416)
 
     # 分数阈值和nms_iou阈值
     conf_thresh = 0.2
@@ -67,8 +66,6 @@ if __name__ == '__main__':
             continue
         else:
             image, boxes, scores, classes = _decode.detect_image(image, True)
-            cv2.imshow('image', image)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
+            cv2.imwrite('result.png', image)
 
     yolo4_model.close_session()
