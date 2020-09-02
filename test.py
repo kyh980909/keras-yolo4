@@ -15,7 +15,7 @@ import cv2
 
 from decode_np import Decode
 
-
+print(test)
 def get_class(classes_path):
     classes_path = os.path.expanduser(classes_path)
     with open(classes_path) as f:
