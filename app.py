@@ -5,7 +5,6 @@ import json
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -27,8 +26,9 @@ def jpy():
 def krw():
     if request.method == 'POST':
         img = request.get_data()
-        result = count_coin.krw_count_coin(json.loads(img)['img'])
+        result = count_coin.krw_count_coin(json.loads(img)['img'], _decode)
         return json.dumps(result)
 
 if __name__ == "__main__":
+    _decode = count_coin.init()
     app.run(host='0.0.0.0', debug=True)

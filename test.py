@@ -51,7 +51,7 @@ if __name__ == '__main__':
     yolo4_model = yolo4_body(Input(shape=model_image_size+(3,)), num_anchors//3, num_classes)
 
     model_path = os.path.expanduser(model_path)
-    assert model_path.endswith('.h5'), 'Keras model or weights must be a .h5 file.'
+    assert model_path.endswith('.h5'), 'Keras model or weights must be a .h5 file.
 
     yolo4_model.load_weights(model_path)
 
