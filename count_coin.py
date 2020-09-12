@@ -87,7 +87,7 @@ def jpy_count_coin(img): # img : str
 
     # 分数阈值和nms_iou阈值
     conf_thresh = 0.2
-    nms_thresh = 0.45
+    nms_thresh = 0.8
 
     yolo4_model = yolo4_body(Input(shape=model_image_size + (3,)), num_anchors // 3, num_classes)
 

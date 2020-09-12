@@ -8,20 +8,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-with open('KRW/krw.JPG', 'rb') as img:
+with open('JPY/yen5.JPG', 'rb') as img:
     base64_string = base64.b64encode(img.read()).decode('utf-8')
 
 start_time = time.time()
-res = requests.post('http://127.0.0.1:5000/krw', data=json.dumps({"img": base64_string})) #58.237.166.210
+res = requests.post('http://0.0.0.0:5000/jpy', data=json.dumps({"img": base64_string})) #58.237.166.159
 print(time.time() -  start_time)
 
 result = json.loads(res.text)
 
-encoded_img = np.fromstring(base64.b64decode(result['image']), dtype = np.uint8)
+encoded_img = np.fromstring(base64.b64decode(result['img']), dtype = np.uint8)
 image = cv2.imdecode(encoded_img, cv2.IMREAD_COLOR)
 
-# plt.imshow(image)
-# plt.show()
+plt.imshow(image)
+plt.show()
 
-print(result['result'])
-print(result['total'])
+# print(result['result'])
+print(result['count'])
