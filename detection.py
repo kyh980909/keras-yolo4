@@ -39,7 +39,7 @@ class DetectJapan:
     classes_path = "model_data/JPY_classes.txt"
     jpy_classes = ('JPY_500', 'JPY_100', 'JPY_50', 'JPY_10', 'JPY_1', 'JPY_5')
 
-    def __init__(self, conf_thresh: float = 0.2, nms_thresh: float = 0.45):
+    def __init__(self, conf_thresh: float = 0.8, nms_thresh: float = 0.8):
         class_names = get_class(self.classes_path)
         anchors = get_anchors(self.anchors_path)
         model_image_size = (416, 416)
@@ -68,6 +68,7 @@ class DetectJapan:
     def detect(self, image_b64: AnyStr, *, fmt: str = ".png") -> Dict:
         image_bin: bytes = b64decode(image_b64)
         image = cv.imdecode(np.frombuffer(image_bin, np.uint8), cv.IMREAD_COLOR)
+        image = cv.resize(image, dsize=(640, 640), interpolation=cv.INTER_AREA)
         with session.as_default():
             with session.graph.as_default():
                 detect_image, *_, classes = self._decoder.detect_image(image, True)
@@ -80,8 +81,11 @@ class DetectJapan:
 
     def count(self, classes: List[int]):
         counter = Counter(classes)
-        for class_ in tuple(counter):
-            counter[self.jpy_classes[class_]] = counter.pop(class_)
+        for key in tuple(counter.keys()):  # 딕셔너리 키 이름 변경
+            counter[self.jpy_classes[key]] = counter.pop(key)
+
+        # for class_ in tuple(counter):
+        #     counter[self.jpy_classes[class_]] = counter.pop(class_)
         return counter
 
 

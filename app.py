@@ -3,6 +3,7 @@ from flask import request
 import count_coin
 import json
 from detection import detect_japan_obj
+import cv2
 
 app = Flask(__name__)
 
@@ -22,5 +23,4 @@ def jpy():
         return json.dumps(result)
 
 if __name__ == "__main__":
-    _decode = count_coin.init()
     app.run(host='0.0.0.0', debug=True)
