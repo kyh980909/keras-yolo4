@@ -68,7 +68,7 @@ class DetectJapan:
     def detect(self, image_b64: AnyStr, *, fmt: str = ".png") -> Dict:
         image_bin: bytes = b64decode(image_b64)
         image = cv.imdecode(np.frombuffer(image_bin, np.uint8), cv.IMREAD_COLOR)
-        image = cv.resize(image, dsize=(640, 640), interpolation=cv.INTER_AREA)
+        image = cv.resize(image, dsize=(1080, 1080), interpolation=cv.INTER_AREA)
         with session.as_default():
             with session.graph.as_default():
                 detect_image, *_, classes = self._decoder.detect_image(image, True)
